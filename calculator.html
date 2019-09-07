@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Online calculator</title>
+	<link rel="stylesheet" type="text/css" href="calculator.css">
+	<script type="text/javascript" src="calculator.js"></script>
+</head>
+<body>
+	<div align="center">
+		<table>
+			<tr>
+				<td colspan="4">
+					<input type="text" id="textBox" class="right" placeholder="0" readonly>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(7)">7</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(8)">8</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(9)">9</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="calculator('+')">+</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(4)">4</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(5)">5</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(6)">6</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="calculator('-')">-</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(1)">1</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(2)">2</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(3)">3</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="calculator('*')">*</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="button" class="full" onclick="numberBtnHandler(0)">0</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="calculator('.')">.</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="caulculator('/')">/</button>
+				</td>
+				<td>
+					<button type="button" class="full" onclick="calculator('=')">=</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<button type="button" class="full" onclick="reset()">C</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
