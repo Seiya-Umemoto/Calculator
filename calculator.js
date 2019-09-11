@@ -1,28 +1,25 @@
-total = 0;
-input = "";
-calc = "+";
-flag = 1;
-sign = "";
-count = 0;
+total = 0; //연산의 총합
+input = ""; // 비연산자
+calc = "+"; //연산자
+flag = 1; //누른 값이 숫자면 0, 연산자면 1
+sign = ""; //값이 '-'이면 숫자를 음수로 만듬
+count = 0; //처음에 '-'를 눌렀을 때 calc가 바뀌지 않도록
 
 function numberBtnHandler(number)
-{
-	if (sign == '-') {
-		number = eval("-" + number);
-		//input = -number;
-		//alert('-' + number)
-		//setText('-' + number);
-		sign = "";
-	}
+{	
 	if (flag == 1) { //직전에 연산자를 눌러서 
 		setText("") // 연산자 누른 다음에 숫자 누르면 화면 리셋
+	}
+	if (sign == '-') { //숫자를 음수로 바꾸기
+		number = eval("-" + number);
+		sign = "";
 	}
 	flag = 0; //입력한 값은 숫자
 	input += number; //처음에 누른 값을 input에 저장
 	count += 1;
 	setText(getText() + number);
 	if (calc == '/') {
-		if (number == 0) {
+		if (number == 0) { // 0으로 나눴을 때
 			setText("");
 			alert("Numbers can't be devided by 0!");
 		}
@@ -37,12 +34,12 @@ function decimal(dec)
 		setText(input);
 		flag = 0;
 	}
-	if (getText().indexOf(dec) != -1) {
+	if (getText().indexOf(dec) != -1) { //".." 두 번 연속으로 입력하면 에러 표시
 		input = getText().slice(0,-1);
 		setText(input);
-		alert("Error: You can't type more than 1 decimal points.");
+		alert("Error: You can't push more than 1 decimal points.");
 	}
-	if (getText() == "") {
+	if (getText() == "") { //창구에 아무것도 없는 상태에서 "."를 누르면 "0.이 되도록"
 		input += "0" + dec;
 		setText("0" + dec);
 		flag = 0;
@@ -72,7 +69,7 @@ function getText()
 
 function reset()
 {
-	setText("");
+	setText(""); //모든 글로번 변수를 초기화
 	total = 0;
 	input = "";
 	calc = "+";
@@ -86,13 +83,13 @@ function calculator(operator)
 	if (flag == 1) {
 		if (getText() == "") {
 			if (operator == "+" || operator == "*" || operator == "=" || operator == "/") {
-				alert("You have to type a number first except for '-' or '.'")
+				alert("You have to push a number first except for '-' or '.'")
 			}
 		}
 		if (getText() != "") {
 		 	if ((!((calc == "-") && (operator == "-"))) &&
 				(operator == "+" || operator == "-" || operator == "*" || operator == "=" || operator == "/")) {
-				alert("You can't type two operators countinusously")
+				alert("You can't push two operators countinusously")
 			}
 		}
 	}
@@ -102,9 +99,9 @@ function calculator(operator)
 	}
 	if (flag == 0) { //직전에 입력한 값이 숫자라면
 		flag = 1; //입력한 값은 연산자
-		if ((calc == "-") && (Number(input) < 0)) {
+		if ((calc == "-") && (Number(input) < 0)) {//연산자가 '-'이며 누른 숫자가 음수이면
 			calc = "+";
-			input = -input;
+			input = -input; //더하기가 실행되도록
 			work = total + calc + input;
 		}
 		else {
@@ -114,17 +111,10 @@ function calculator(operator)
 		input = ""; //입력한 값 리셋
 		setText(total);
 	}
-	if (operator == "=") {
+	if (operator == "=") { //'='을 눌렀을 때 총합이 표시되도록
 		setText(total)
-	} else if (count >= 1) {
+	} else if (count >= 1) { //처음에 '-'를 눌렀을 때 calc가 바뀌지 않도록
 		calc = operator; //누른 연산자를 유지
 	}
 	count += 1;
 }
-
-//0으로 나눴을 때
-//연산자 연속으로 입력
-//- 두번 입력x
-
-//- 누른 다음에 . 누르면 -0. 가 되게
-//- 누른 다음에 0.누르면 -0. 가 되게
