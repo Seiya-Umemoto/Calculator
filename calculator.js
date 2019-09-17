@@ -4,7 +4,7 @@ calc = "+"; //연산자
 flag = 1; //누른 값이 숫자면 0, 연산자면 1
 sign = ""; //값이 '-'이면 숫자를 음수로 만듬
 count = 0; //처음에 '-'를 눌렀을 때 calc가 바뀌지 않도록
-equal = 0;
+equal = 0; //직전에 "=" 연산자를 눌렀는가? "=" 눌렀으면 1, 아니면 0
 
 function numberBtnHandler(number)
 {	
@@ -13,18 +13,11 @@ function numberBtnHandler(number)
 		setText("") // 연산자 누른 다음에 숫자 누르면 화면 리셋
 	}
 	if (sign == '-') { //숫자를 음수로 바꾸기
-		// if (number == 0) {
-		// 	zero = 1;
-		// }
 		number = eval("-" + number);
 		sign = "";
 	}
 	flag = 0; //입력한 값은 숫자
 	input += number; //처음에 누른 값을 input에 저장
-	//alert(input)
-	// if (zero == 1) {
-	// 	input = eval("-" + input);
-	// }
 	count += 1;
 	setText(getText() + number);
 	if (calc == '/') {
@@ -37,37 +30,19 @@ function numberBtnHandler(number)
 
 function decimal(dec)
 {
-	//if (getText().slice(0,2) == "0.") {
-		//input += "0" + dec;
-		//input = input.slice(0,-1);
-		//setText(input);
-		//flag = 0; //숫자를 입력한 것으로 간주
-	//}
 	if (getText().indexOf(dec) != -1) { //"." 두 번 입력하면 에러 표시
-		// input = getText() + dec;
-		// input = input.slice(0,-1);
 		setText(input);
 		alert("Error: You can't push more than 1 decimal points.");
 	}
 	if (getText() == "") { //창구에 아무것도 없는 상태에서 "."를 누르면 "0.이 되도록"
 		input += "0" + dec; //input이 "0."이 된다.
 		setText(input);
-		// if (count == 1) {
-		// 	zero = 1;
-		// }
 		flag = 0; //숫자를 입력한 것으로 간주
 	}
 	else if (getText().indexOf(dec) == -1) { //만약에 소수점이 없으면
 		input += dec; //소수점을 추가한다
 		setText(getText() + dec);
 	}
-	// else if (getText() != "" && (calc == "+" || calc == "-" || calc == "=" || calc == "/")) {
-	// 	input = input.slice(1);
-	// 	input += "0" + dec;
-	// 	input = input.slice(1);
-	// 	setText("0" + dec)
-	// 	flag = 0;
-	// }
 }
 
 function setText(text) //창구에 표시하는 값
@@ -87,6 +62,7 @@ function reset()
 	input = "";
 	calc = "+";
 	flag = 1;
+	sign = "";
 	count = 0;
 	equal = 0;
 
@@ -95,16 +71,14 @@ function reset()
 function calculator(operator)
 {
 	if (flag == 1) {
-		if (equal == 1) {}
-		else if (getText() == "") {
+		if (equal == 1) {} //직전에 "=" 눌렀으면 다음에 연산사 누르는 것을 허용
+		else if (getText() == "") { //처음에 연산자 누르는 것을 방지
 			if (operator == "+" || operator == "*" || operator == "=" || operator == "/") {
 				alert("You have to push a number first except for '-' or '.'")
 			}
 		}
-		else if ((getText() != "")) {
-		 	// if ((!((calc == "-") && (operator == "-"))) &&
-				// (operator == "+" || operator == "-" || operator == "*" || operator == "/")) {
-			if ((operator == "+" || operator == "-" || operator == "*" || operator == "/")) {
+		else if ((getText() != "")) { //두변 연속으로 연산자 누르는 것을 방지
+			if ((operator == "+" || operator == "-" || operator == "*" || operator == "=" || operator == "/")) {
 				if ((calc == "-") && (operator == "-")) {}
 				else {
 					alert("You can't push two operators countinusously")
@@ -114,7 +88,7 @@ function calculator(operator)
 		}
 	}
 	if ((getText() == "") && (operator == '-') ||
-			(getText() != "") && (calc == '-') && (operator == '-')) {
+			(getText() != "") && (calc == '-') && (operator == '-')) { //마이너스 마이너스 연산을 위해
 		sign = '-'
 	}
 	if (flag == 0) { //직전에 입력한 값이 숫자라면
