@@ -71,7 +71,11 @@ function reset()
 function calculator(operator)
 {
 	if (flag == 1) {
-		if (equal == 1) {} //직전에 "=" 눌렀으면 다음에 연산사 누르는 것을 허용
+		if (equal == 1) { //직전에 "=" 눌렀으면 다음에 연산사 누르는 것을 허용
+			if (operator == "=") { //두번 연속으로 "=" 누르면
+				alert("You can't push two operators continuously") 
+			}
+		}
 		else if (getText() == "") { //처음에 연산자 누르는 것을 방지
 			if (operator == "+" || operator == "*" || operator == "=" || operator == "/") {
 				alert("You have to push a number first except for '-' or '.'")
@@ -81,7 +85,7 @@ function calculator(operator)
 			if ((operator == "+" || operator == "-" || operator == "*" || operator == "=" || operator == "/")) {
 				if ((calc == "-") && (operator == "-")) {}
 				else {
-					alert("You can't push two operators countinusously")
+					alert("You can't push two operators countinuously")
 				}
 			}
 			
