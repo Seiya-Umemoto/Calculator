@@ -44,8 +44,8 @@ function decimal(dec)
 		setText("0" + dec);
 		flag = 0;
 	}
-	else if (getText().indexOf(dec) == -1) {
-		input += dec;
+	else if (getText().indexOf(dec) == -1) { //만약에 소수점이 없으면
+		input += dec; //소수점을 추가한다
 		setText(getText() + dec);
 	}
 	else if (getText() != "" && (calc == "+" || calc == "-" || calc == "=" || calc == "/")) {
