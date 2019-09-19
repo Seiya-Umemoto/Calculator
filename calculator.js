@@ -11,6 +11,12 @@ zero = ""; //-0을 만들기 위해
 function numberBtnHandler(number)
 {	
 	equal = 0;
+	if (input.length == 1) { //만약에 처음에 0을 입력하고 그 다음에 숫자를 입력하면
+		if (input.indexOf(0) == 0) {
+			input = input.slice(1); //0을 없앤다.
+			setText(input);
+		}
+	}
 	if (flag == 1) { //직전에 연산자를 눌러서 
 		setText(""); // 연산자 누른 다음에 숫자 누르면 화면 리셋
 	}
@@ -19,7 +25,7 @@ function numberBtnHandler(number)
 			zero = "0."
 			sign = 2;
 		} //"0.-숫자"가 되지 않도록
-		else{
+		else if (number != 0){
 			number = -number;
 			sign = 0;
 		}
